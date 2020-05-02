@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText } from 'reactstrap';
+import { Form, FormGroup, Input, InputGroup, InputGroupAddon, InputGroupText, Button } from 'reactstrap';
 
 export class NoteEntry extends Component {
 	static propTypes = {
-
+		updateNote: PropTypes.func.isRequired
 	};
 
 	constructor(props){
@@ -15,6 +15,16 @@ export class NoteEntry extends Component {
 			category: null,
 			note: null
 		};
+
+		this.title = <h2 id={"title"}> Notely </h2>;
+
+	}
+
+	handleSave = () => {
+		const { updateNote } = this.props;
+		const { title, category, note} = this.state;
+
+		updateNote({ title, category, note });
 	}
 
 	render(){
@@ -22,7 +32,7 @@ export class NoteEntry extends Component {
 		console.log(this.state);
 		return (	
 			<div>
-				<h2 id={"title"}> Notely </h2>
+			{this.title}
 				<Form>
 					<FormGroup>
 						<InputGroup id="note_title_entry">
@@ -51,11 +61,24 @@ export class NoteEntry extends Component {
 					</FormGroup>
 
 					<FormGroup>
-						<Input type="textarea" name="note" id="note_text_entry" 
+						<Input 
+							type="textarea" 
+							name="note" 
+							id="note_text_entry" 
 							onBlur={(event) => { this.setState({note:event.target.value}); }}
 						/>
 					</FormGroup>
 				</Form>
+
+			<div id="save_button">
+				<Button 
+					color="primary" 
+					size="lg"
+					onClick={this.handleSave}
+				>
+					Save Notes
+				</Button>
+			</div>
 			</div>
 		);
 

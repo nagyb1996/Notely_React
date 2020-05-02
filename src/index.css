@@ -7,7 +7,16 @@
 
 #note_text_entry{
 	width: 100%;
-	height: 500px;
+	height: 400px;
 
+}
 
+#note_title_entry{
+	padding-bottom: 5px;
+}
+
+#save_button{
+	display: flex;
+	justify-content: center;
+	padding-bottom: 50px;
 }
